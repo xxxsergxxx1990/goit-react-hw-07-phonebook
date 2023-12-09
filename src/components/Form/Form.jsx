@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPhoneBookValue } from "redux/phoneBookSlice";
 import { FormStyle } from "./Form.styled";
 import { InputStyle, LabelStyle, ButtonStyle } from "components/App.styled";
-import { postContactThunk } from "services/fetchContacts";
+import { addContact  } from "services/fetchContacts";
 
 export const options = {
     width: '400px',
@@ -30,7 +30,7 @@ export const Form = () => {
             return;
         };
 
-        dispatch(postContactThunk(newObj))
+        dispatch(addContact (newObj))
         
         reset();
     };

@@ -3,14 +3,14 @@ import { ButtonStyle } from 'components/App.styled';
 import { getFilter } from "redux/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhoneBookValue } from "redux/phoneBookSlice";
-import { delContactThunk, getContactsThunk } from "services/fetchContacts";
+import { deleteContact , fetchContacts } from "services/fetchContacts";
 import { useEffect } from "react";
 
 export const ContactsList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getContactsThunk())
+        dispatch(fetchContacts())
     }, [dispatch]);
 
     const phoneBook = useSelector(getPhoneBookValue);
@@ -21,7 +21,7 @@ export const ContactsList = () => {
         (name.toLowerCase().includes(lowerFilter)));
   
     const deleteContact = (contactId) => {
-        dispatch(delContactThunk(contactId))
+        dispatch(deleteContact (contactId))
     };
     
     return (

@@ -33,17 +33,17 @@ const delContact = async (contactId, thunkAPI) => {
     }
 };
 
-export const getContactsThunk = createAsyncThunk(
+export const fetchContacts = createAsyncThunk(
     'phoneBook/getContacts',
     getContacts
 );
 
-export const postContactThunk = createAsyncThunk(
+export const addContact  = createAsyncThunk(
     'phoneBook/postContact',
     postContact
 );
     
-export const delContactThunk = createAsyncThunk(
+export const deleteContact  = createAsyncThunk(
     'phoneBook/delContact',
     delContact
 );

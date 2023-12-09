@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
-import { delContactThunk, getContactsThunk, postContactThunk } from 'services/fetchContacts';
+import { deleteContact , fetchContacts, addContact  } from 'services/fetchContacts';
 
 const contactInitialState = {
     contacts: [],
@@ -17,7 +17,7 @@ const onRejected = (state, { payload }) => {
     state.error = payload;
 };
 
-const arrOfActs = [getContactsThunk, postContactThunk, delContactThunk];
+const arrOfActs = [fetchContacts, addContact , deleteContact ];
 
 const addStatusToActs = status =>
     arrOfActs.map((el) => el[status]);
@@ -27,17 +27,17 @@ export const phoneBookSlice = createSlice({
     initialState: contactInitialState,
     extraReducers: builder => {
         builder
-            .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
+            .addCase(fetchContacts.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.contacts = payload;
                 state.error = null;
             })
-            .addCase(postContactThunk.fulfilled, (state, { payload }) => {
+            .addCase(addContact .fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.contacts = [...state.contacts, payload]
                 state.error = null;
             })
-            .addCase(delContactThunk.fulfilled, (state, { payload }) => {
+            .addCase(deleteContact .fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.contacts = state.contacts.filter(contact => contact.id !== payload.id)
                 state.error = null;
