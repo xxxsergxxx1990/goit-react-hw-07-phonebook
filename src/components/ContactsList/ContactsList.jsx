@@ -1,8 +1,8 @@
 import { ContactListStyle, ContactItemStyle } from "./ContactsList.styled"
 import { ButtonStyle } from 'components/App.styled';
-import { getFilter } from "redux/filterSlice";
+
 import { useDispatch, useSelector } from "react-redux";
-import { getPhoneBookValue } from "redux/phoneBookSlice";
+
 import { deleteContact , fetchContacts } from "services/fetchContacts";
 import { useEffect } from "react";
 import { selectVisibleContacts } from "redux/phoneBookSlice";
