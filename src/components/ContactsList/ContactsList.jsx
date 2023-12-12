@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPhoneBookValue } from "redux/phoneBookSlice";
 import { deleteContact , fetchContacts } from "services/fetchContacts";
 import { useEffect } from "react";
-
+import { selectVisibleContacts } from "redux/phoneBookSlice";
 export const ContactsList = () => {
     const dispatch = useDispatch();
 
@@ -13,14 +13,12 @@ export const ContactsList = () => {
         dispatch(fetchContacts())
     }, [dispatch]);
 
-    const phoneBook = useSelector(getPhoneBookValue);
-    const filterPhoneBook = useSelector(getFilter);
 
-    const lowerFilter = filterPhoneBook.toLowerCase();
-    const visibleContacts = phoneBook.filter(({ name }) =>
-        (name.toLowerCase().includes(lowerFilter)));
+
+    
+    const visibleContacts = useSelector(selectVisibleContacts)
   
-    const deleteContact = (contactId) => {
+    const deletedContact = (contactId) => {
         dispatch(deleteContact (contactId))
     };
     
@@ -29,7 +27,7 @@ export const ContactsList = () => {
             {visibleContacts.map(({ name, number, id }) => (
                 <ContactItemStyle key={id}>
                     <p>{name}: {number}</p>
-                    <ButtonStyle type="button" onClick={() => deleteContact(id)}>Delete</ButtonStyle>
+                    <ButtonStyle type="button" onClick={() => deletedContact(id)}>Delete</ButtonStyle>
                 </ContactItemStyle>))}
         </ContactListStyle>
     );
